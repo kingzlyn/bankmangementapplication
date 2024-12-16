@@ -1,0 +1,205 @@
+.logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    top: 20px;  /* Adjust vertical position */
+    left: 20px; /* Adjust horizontal position */
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Logo Image Styling */
+.logo-image {
+    width: 120px; /* Adjust size as necessary */
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Logo Image Hover Effect */
+.logo-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Website Name Styling */
+.kingzbank {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;  /* Adjust size to fit the layout */
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #ff00cc, #00b3ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-left: 20px;  /* Space between logo and website name */
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* Glowing Effect for Website Name */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #d34d4d, 0 0 10px #d34d4d, 0 0 15px #d34d4d, 0 0 20px #3d0d89, 0 0 30px #3d0d89;
+    }
+    100% {
+        text-shadow: 0 0 10px #c30303, 0 0 20px #c30303, 0 0 30px #c30303, 0 0 40px #3d0d89, 0 0 50px #3d0d89;
+    }
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for forms */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    animation: slideIn 1s ease-out;
+}
+
+/* Form Heading */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Input Fields */
+input[type="text"], input[type="password"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Input Focus Effect */
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+    border-color: #7a42f4;
+    box-shadow: 0 0 8px rgba(122, 66, 244, 0.5);
+}
+
+/* Button with Gradient */
+.btn-grad {
+    background-image: linear-gradient(to right, #870000 0%, #190A05 51%, #870000 100%);
+    color: white;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 20px #eee;
+    transition: background-position 0.5s, transform 0.3s ease-in-out;
+    display: block;
+    margin: 10px auto;
+}
+
+/* Button Hover Effects */
+.btn-grad:hover {
+    background-position: right center;
+    transform: translateY(-5px);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Form Switch Link */
+.form-switch {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-switch a {
+    color: #870000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.form-switch a:hover {
+    color: #7a42f4;
+}
+
+/* Animations for Transition Effects */
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Focus animation */
+input[type="text"]:focus, input[type="password"]:focus {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* Button Animation for Submit */
+button[type="button"]:hover {
+    animation: pulse 0.8s ease-out;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .btn-grad {
+        padding: 12px 30px;
+    }
+}

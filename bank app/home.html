@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINGZBANK - Your Trusted Banking Partner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arbutus&family=Kalnia+Glaze:wght@100..700&family=Nosifer&family=Rubik+Wet+Paint&family=Rye&family=Slabo+27px&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Arbutus&family=Borel&family=Kalnia+Glaze:wght@100..700&family=Nosifer&family=Rubik+Wet+Paint&family=Rye&family=Slabo+27px&display=swap" rel="stylesheet">
+
+    
+    <style>
+        /* Body Background */
+        body {
+            background-image: radial-gradient(circle 993px at 0.5% 50.5%, rgba(137, 171, 245, 0.37) 0%, rgba(245, 247, 252, 1) 100.2%);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Gradient Button */
+        .btn-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-image: linear-gradient(to right, #1F1C2C 0%, #928DAB 51%, #1F1C2C 100%);
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .btn-grad:hover {
+            background-position: right center;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* 3D Cards */
+        .card-3d {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-3d img {
+            border-radius: 15px 15px 0 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navbar with Gradient Background */
+.navbar {
+    background-image: linear-gradient(135deg, #cccaca 10%, #676767 100%);
+    color: white;
+}
+
+.navbar .navbar-brand, 
+.navbar .nav-link {
+    color: rgb(12, 12, 12); /* Ensure text is visible on the gradient background */
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+.navbar .nav-link{
+    color: white;
+}
+
+.navbar .nav-link:hover {
+    color: #faf5f5; /* Highlight effect on hover */
+    text-decoration: underline;
+}
+.font {
+  font-family: "Rye", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.fonth2 {
+  font-family: "Rye", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+.parafont {
+  font-family: "Borel", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+section{
+ margin-top: 20px;
+ margin-bottom: 20px;
+}
+.hero{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+p{
+    font-size: 20px;
+}
+
+/* Logo Container */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+.kingzbank {
+    font-family: "Rye", serif;
+    font-size: 2rem;
+    color: #4c264f;
+    margin-top: 10px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="logo-container">
+        <!-- Logo Image -->
+        <img src="src/kingzbank.webp" alt="KingzBank Logo" class="logo-image">
+        <!-- Website Name -->
+        <h1 class="kingzbank">KingzBank</h1>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+           
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Register/Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br><br>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="font">Welcome to KINGZBANK</h1>
+            <p class="parafont">Your trusted partner for all your banking needs</p>
+            
+        </div>
+    </header>
+    <br><br><br>
+    <!-- About Section -->
+    <section id="about" class="about bg-light">
+        <div class="container text-center">
+            <h2 class="fonth2">About KINGZBANK</h2>
+            <p >KINGZBANK has been a trusted financial partner for over 50 years, offering top-notch banking services that empower individuals and businesses alike. From savings accounts to business loans, we provide solutions tailored to your needs.</p>
+        </div>
+    </section>
+    <br><br><br>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container text-center">
+            <h2 class="fonth2">Our Services</h2>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card card-3d">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">Personal Banking</h5>
+                            <p class="card-text ">Manage your savings, loans, and investments with ease.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-3d">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">Business Banking</h5>
+                            <p class="card-text ">Comprehensive financial solutions for businesses of all sizes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-3d">
+                       
+                        <div class="card-body">
+                            <h5 class="card-title">Online Banking</h5>
+                            <p class="card-text ">24/7 access to your accounts from anywhere in the world.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<br><br><br>
+    <!-- Contact Section -->
+    <section id="contact" class="contact bg-light">
+        <div class="container">
+            <h2 class="text-center">Contact Us</h2>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h5>Corporate Office</h5>
+                    <p>KINGZBANK Towers, Main Avenue, City Center</p>
+                    <p>Email: contact@kingzbank.com</p>
+                    <p>Phone: +91 XXXXXXXXXX</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Customer Support</h5>
+                    <p>Need assistance? Our team is here to help!</p>
+                    <p>Email: support@kingzbank.com</p>
+                    <p>Phone: +91 12345 67890</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 KINGZBANK. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

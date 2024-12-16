@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINGZBANK - Admin page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+     body {
+    font-family: 'Arial', sans-serif;
+    background-image: radial-gradient(circle 993px at 0.5% 50.5%, rgba(137, 171, 245, 0.37) 0%, rgba(245, 247, 252, 1) 100.2%);
+    margin: 0;
+    padding: 0;
+    color: #333;
+    margin-left: 300px;
+}
+
+.kingz-header {
+    text-align: center;
+    background: linear-gradient(to right, #1F1C2C, #928DAB);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(237, 233, 233, 0.1);
+}
+
+.container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #1F1C2C, #928DAB);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.loan-card {
+    padding: 20px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.loan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.customer-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.customer-signature {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #1F1C2C 0%, #928DAB 51%, #1F1C2C 100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+#dailyTransactionPieChart {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    margin-top: 20px;
+    width: 500px;
+    height: 500px;
+}
+/* Logo Container */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+.kingzbank {
+    font-family: "Rye", serif;
+    font-size: 2rem;
+    color: #4c264f;
+    margin-top: 10px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background: linear-gradient(to right, #1F1C2C, #928DAB);
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .content {
+            margin-left: 270px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="window.location.href='home.html'" style="background: linear-gradient(to right, #000000, #808080); color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; position: absolute; top: 10px; right: 10px;">
+        Home
+    </button>
+    
+    <div class="logo-container">
+        <!-- Logo Image -->
+        <img src="src/kingzbank.webp" alt="KingzBank Logo" class="logo-image">
+        <!-- Website Name -->
+        <h1 class="kingzbank">KingzBank</h1>
+    </div>
+    <div class="sidebar">
+        <h3>Navigation</h3>
+        <a href="#search">Search Customer</a>
+        <a href="#pending">Pending Loans</a>
+        <a href="#update">Update Daily Jewel</a>
+        <a href="#piechart">Daily Transactions</a>
+    </div>
+    <div class="container mt-4 search" id="search">
+        <form id="searchForm" class="mb-4">
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text" id="accountNumber" class="form-control" placeholder="Enter Account Number" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="customerDetails" class="passbook d-none">
+            <!-- Customer details will be rendered here -->
+        </div>
+    </div>
+
+    <div class="container mt-4 pending" id="pending">
+        <h3 class="mb-4">Pending Loan Applications</h3>
+        <div id="loanContainer" class="row">
+            <!-- Loan cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Daily Jewel Amount Update Form -->
+    <div class="container mt-4 update" id="update">
+        <h3 class="mb-4">Update Daily Jewel Amount</h3>
+        <form id="updateForm">
+            <div class="mb-3">
+                <label for="dailyJewelAmount" class="form-label">Daily Jewel Amount</label>
+                <input type="number" id="dailyJewelAmount" class="form-control" placeholder="Enter Daily Jewel Amount" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Update</button>
+        </form>
+
+        <div id="message" class="mt-4"></div>
+    </div>
+    <div class="container mt-5 piechart" id="piechart">
+        <h2 class="text-center">Daily Transactions Pie Chart</h2>
+        <input type="date" id="transactionDate" class="form-control mb-3" />
+        <button id="fetchChartBtn" class="btn btn-primary mb-4">Fetch Chart</button>
+        <canvas id="dailyTransactionPieChart"></canvas>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const BASE_URL = "http://localhost:8080/api/customers"; // Backend API URL
+
+        // Event listener for form submission
+        document.getElementById("searchForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const accountNumber = document.getElementById("accountNumber").value.trim();
+            const customerDetails = document.getElementById("customerDetails");
+
+            try {
+                // Fetch customer data
+                const response = await fetch(`${BASE_URL}/search/${accountNumber}`);
+                if (!response.ok) {
+                    throw new Error("Customer not found or an error occurred.");
+                }
+
+                const customer = await response.json();
+
+                // Display customer details
+                customerDetails.classList.remove("d-none");
+                customerDetails.innerHTML = `
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="${customer.photo}" alt="Customer Photo" class="customer-photo me-3">
+                        <div>
+                            <h4>${customer.name}</h4>
+                            <p><strong>Account Number:</strong> ${customer.accountNumber}</p>
+                        </div>
+                    </div>
+                    <p><strong>Balance:</strong> ₹${customer.balance}</p>
+                    <p><strong>Age:</strong> ${customer.age}</p>
+                    <p><strong>Gender:</strong> ${customer.gender}</p>
+                    <p><strong>Mobile:</strong> ${customer.mobile}</p>
+                    <p><strong>Aadhar:</strong> ${customer.aadhar}</p>
+                    <p><strong>PAN:</strong> ${customer.pan}</p>
+                    <p><strong>IFSC Code:</strong> ${customer.ifsc}</p>
+                    <p><strong>Signature:</strong></p>
+                    <img src="${customer.signature}" alt="Customer Signature" class="customer-signature">
+                `;
+            } catch (error) {
+                customerDetails.classList.add("d-none");
+                alert(error.message);
+            }
+        });
+
+        // Function to fetch loans with status 'Pending'
+        async function fetchPendingLoans() {
+            try {
+                const response = await fetch("http://localhost:8080/api/loans/pending");
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch pending loans.");
+                }
+
+                const loans = await response.json();
+                displayLoans(loans);
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        // Function to display loans in Bootstrap cards
+        function displayLoans(loans) {
+            const loanContainer = document.getElementById("loanContainer");
+            loanContainer.innerHTML = ""; // Clear existing cards
+
+            loans.forEach((loan) => {
+                const loanCard = document.createElement("div");
+                loanCard.className = "col-md-4";
+                 
+                loanCard.innerHTML = `
+                    <div class="loan-card">
+                        <h5>Account Number: ${loan.accountnumber}</h5>
+                        <p><strong>Loan Type:</strong> ${loan.loanType}</p>
+                        <p><strong>Loan Amount:</strong> ₹${loan.loanAmount}</p>
+                        <p><strong>Status:</strong> ${loan.status}</p>
+                        <button class="btn btn-success me-2" onclick="updateLoanStatus('${loan.id}', 'Approved')">Approve</button>
+                        <button class="btn btn-danger" onclick="updateLoanStatus('${loan.id}', 'Disapproved')">Disapprove</button>
+                    </div>
+                `;
+
+                loanContainer.appendChild(loanCard);
+            });
+        }
+
+        // Fetch pending loans on page load
+        fetchPendingLoans();
+
+        // Function to update loan status
+        async function updateLoanStatus(loanId, newStatus) {
+            console.log(loanId);
+            try {
+                const response = await fetch("http://localhost:8080/api/loans/update-status-by-account", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        loanId: loanId,
+                        newStatus: newStatus,
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to update loan status.");
+                }
+
+                const message = await response.text();
+                alert(message);
+
+                // Refresh the pending loans
+                fetchPendingLoans();
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        // Event listener for daily jewel amount update
+        document.getElementById("updateForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const dailyJewelAmount = parseFloat(document.getElementById("dailyJewelAmount").value.trim());
+            const messageDiv = document.getElementById("message");
+
+            if (isNaN(dailyJewelAmount) || dailyJewelAmount <= 0) {
+                messageDiv.innerHTML = `<div class="alert alert-danger">Please enter a valid Daily Jewel Amount.</div>`;
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8080/api/loans/update-daily-jewel", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ dailyJewelAmount }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(await response.text());
+                }
+
+                const message = await response.text();
+                messageDiv.innerHTML = `<div class="alert alert-success">${message}</div>`;
+            } catch (error) {
+                messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+            }
+        });
+
+
+        let dailyTransactionChart; // Declare a global variable for the chart instance
+
+document.getElementById("fetchChartBtn").addEventListener("click", async function () {
+    const date = document.getElementById("transactionDate").value;
+    if (!date) {
+        alert("Please select a date!");
+        return;
+    }
+
+    const BASE_URL = "http://localhost:8080/api/transactions";
+
+    try {
+        // Fetch daily transactions
+        const response = await axios.get(`${BASE_URL}/daily/${date}`);
+        console.log(response);
+        const { Deposits, Withdrawals } = response.data;
+ 
+ 
+        // Destroy the existing chart instance if it exists
+        if (dailyTransactionChart) {
+            dailyTransactionChart.destroy();
+        }
+
+        // Render Pie Chart
+        const ctx = document.getElementById("dailyTransactionPieChart").getContext("2d");
+        dailyTransactionChart = new Chart(ctx, {
+            type: "pie",
+            data: {
+                labels: ["Deposits", "Withdrawals"],
+                datasets: [
+                    {
+                        data: [Deposits, Withdrawals],
+                        backgroundColor: ["green", "red"],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top",
+                    },
+                    title: {
+                        display: true,
+                        text: `Daily Transactions for ${date}`,
+                    },
+                },
+            },
+        });
+    } catch (error) {
+        console.error("Error fetching daily transactions:", error);
+        alert("Failed to fetch daily transactions!");
+    }
+});
+
+    </script>
+</body>
+
+</html>

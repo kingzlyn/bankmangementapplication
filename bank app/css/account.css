@@ -1,0 +1,119 @@
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Logo Styling */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    max-width: 100px;
+}
+
+.kingzbank {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form Container Styling */
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+    margin-top: 200px;
+}
+
+#buttons-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-image: linear-gradient(to right, #870000 0%, #190A05 51%, #870000 100%);
+}
+
+.btn-primary {
+    background-image: linear-gradient(to right, #870000 0%, #190A05 51%, #870000 100%);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-image: linear-gradient(to right, #870000 0%, #190A05 51%, #870000 100%);
+    color: #fff;
+}
+
+button:hover {
+    background-position: right center;
+    transform: translateY(-5px);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Form Styling */
+form {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form.active {
+    display: flex;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}

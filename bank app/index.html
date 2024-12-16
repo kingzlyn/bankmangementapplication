@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register/Login Form</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="src/kingzbank.webp" type="image/x-icon">
+    <style>
+       /* Body Background */
+body {
+    background-image: radial-gradient(circle 993px at 0.5% 50.5%, rgba(137, 171, 245, 0.37) 0%, rgba(245, 247, 252, 1) 100.2%);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Logo Container */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+.kingzbank {
+    font-family: "Rye", serif;
+    font-size: 2rem;
+    color: #4c264f;
+    margin-top: 10px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+.form-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Form Styling */
+form h2 {
+    font-family: "Rye", serif;
+    color: #1f1c2c;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #4c264f;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d5d6e0;
+    border-radius: 5px;
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px #928dab;
+}
+
+/* Button Gradient Effect */
+.btn-grad {
+    background: linear-gradient(135deg, #928dab 10%, #1f1c2c 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.btn-grad:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Switch Link */
+.form-switch {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #4c264f;
+}
+
+.form-switch a {
+    color: #1f1c2c;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.form-switch a:hover {
+    color: #928dab;
+    text-decoration: underline;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='home.html'" style="background: linear-gradient(to right, #000000, #808080); color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; position: absolute; top: 10px; right: 10px;">
+        Home
+    </button>
+    
+    <div class="logo-container">
+        <!-- Logo Image -->
+        <img src="src/kingzbank.webp" alt="KingzBank Logo" class="logo-image">
+        <!-- Website Name -->
+        <h1 class="kingzbank">KingzBank</h1>
+    </div>
+    
+    <div class="form-container" id="form-container">
+        <form id="register-form">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role">
+                    <option value="admin">Admin</option>
+                    <option value="cashier">Cashier</option>
+                    <option value="accountcreator">Account Creator</option>
+                    <option value="customer">Customer</option>
+                    <option value="jewelloan">Jewel Loan</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn-grad" onclick="register()">Register</button>
+            </div>
+            <div class="form-switch">
+                Already have an account? <a href="#" onclick="switchToLogin()">Login</a>
+            </div>
+        </form>
+
+        <form id="login-form" style="display: none;">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter password">
+            </div>
+            <div class="form-group">
+                <label for="login-role">Role</label>
+                <select id="login-role">
+                    <option value="admin">Admin</option>
+                    <option value="cashier">Cashier</option>
+                    <option value="accountcreator">Account Creator</option>
+                    <option value="customer">Customer</option>
+                    <option value="jewelloan">Jewel Loan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn-grad" onclick="login()">Login</button>
+            </div>
+            <div class="form-switch">
+                Don’t have an account? <a href="#" onclick="switchToRegister()">Register</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function switchToLogin() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        function switchToRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function register() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const role = document.getElementById('role').value;
+
+    if (!username || !password || !role) {
+        alert('Please fill out all fields.');
+        return;
+    }
+
+    // Create a user object
+    const user = {
+        name: username,
+        password: password,
+        role: role
+    };
+
+    // Send POST request to the backend API
+    fetch('http://localhost:8080/api/users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', // Ensure the correct content type is set
+        },
+        body: JSON.stringify(user),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to register');
+        }
+        return response.text(); // Change to `.text()` to handle plain text response
+    })
+    .then(data => {
+        console.log('Registration successful:', data);
+        alert(data);  // Show the response message
+        switchToLogin();  // Switch to login form after successful registration
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Registration failed. Please try again.');
+    });
+}
+
+
+function login() {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+    const role = document.getElementById('login-role').value;
+
+    if (!username || !password || !role) {
+        alert('Please fill out all fields.');
+        return;
+    }
+
+    // Create a user object for login (assuming the backend expects 'email' or 'username')
+    const user = {
+        email: username,  // Use 'email' (or 'username') instead of 'name'
+        password: password,
+        role: role // role may not be required for login, remove if not needed
+    };
+
+    // Send POST request to the backend API for login
+    fetch('http://localhost:8080/api/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => {
+        // Check if the response is JSON or plain text
+        if (response.ok) {
+            return response.text();  // Use text() instead of json() for plain text responses
+        } else {
+            throw new Error('Login failed');
+        }
+    })
+    .then(data => {
+        // If the response is a message, show it
+        alert(data);  // Show the response message (like "Login successful!" or error message)
+
+        // Redirect user based on role
+        if (role === 'admin') {
+            window.location.href = 'admin.html';  // Redirect to admin page
+        } else if (role === 'cashier') {
+            window.location.href = 'cashier.html';  // Redirect to cashier page
+        } else if (role === 'accountcreator') {
+            window.location.href = 'accountcreator.html';  // Redirect to account creator page
+        } else if (role === 'customer') {
+            window.location.href = 'customer.html';  // Redirect to customer page
+        } else if (role === 'jewelloan') {
+            window.location.href = 'jewelloan.html';  // Redirect to jewel loan page
+        }
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+}
+
+
+    </script>
+</body>
+</html>

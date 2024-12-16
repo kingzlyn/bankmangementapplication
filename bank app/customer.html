@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration & Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Body Styling */
+body {
+    background: linear-gradient(to bottom, #ebe8e8, #bfbaba);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #f8f8f8;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Styling */
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+/* Card Styling */
+.card {
+    background: linear-gradient(145deg, #f5f4f4, #e3dfdf);
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px #202020, -8px -8px 15px #444;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    color: #272626;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 20px #edeaea, -10px -10px 20px #c7c4c4;
+}
+
+/* Form Elements */
+.form-label {
+    color: #ddd;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    background: #f6f4f4;
+    border: none;
+    border-radius: 10px;
+    color: #f8f8f8;
+    padding: 10px;
+    box-shadow: inset 5px 5px 10px #b0adad, inset -5px -5px 10px #9e9898;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Button Styling */
+.btn {
+    background: linear-gradient(145deg, #4a4a4a, #525252);
+    border: none;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 10px #202020, -5px -5px 10px #404040;
+    transition: all 0.3s ease;
+}
+
+
+
+/* Toggle Link */
+.toggle-link {
+    color: #1e90ff;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.toggle-link:hover {
+    color: #4682b4;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card {
+    animation: slideIn 0.6s ease forwards;
+}
+
+/* Input Focus Animation */
+.form-control:focus {
+    animation: glow 0.6s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #4caf50;
+    }
+    to {
+        box-shadow: 0 0 10px #4caf50;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .container {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='home.html'" style="background: linear-gradient(to right, #000000, #808080); color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; position: absolute; top: 10px; right: 10px;">
+        Home
+    </button>
+    
+    <div class="container">
+        <!-- Registration Card -->
+        <div id="registration-card" class="card p-4">
+            <h3 class="text-center">Register</h3>
+            <form id="registration-form" onsubmit="handleRegister(event)">
+                <div class="mb-3">
+                    <label for="regAccountNumber" class="form-label">Account Number</label>
+                    <input type="text" class="form-control" id="regAccountNumber" required>
+                </div>
+                <div class="mb-3">
+                    <label for="regPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="regPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form><br><br>
+            <div class="text-center">
+                Already have an account? <span class="toggle-link" onclick="toggleView()">Login here</span>
+            </div>
+        </div>
+
+        <!-- Login Card -->
+        <div id="login-card" class="card p-4" style="display: none;">
+            <h3 class="text-center">Login</h3>
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="mb-3">
+                    <label for="loginAccountNumber" class="form-label">Account Number</label>
+                    <input type="text" class="form-control" id="loginAccountNumber" required>
+                </div>
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-success">Login</button>
+            </form><br><br>
+           
+            <div class="text-center">
+                Don't have an account? <span class="toggle-link" onclick="toggleView()">Register here</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:8080/api";
+
+        // Toggle between Registration and Login views
+        function toggleView() {
+            const regCard = document.getElementById("registration-card");
+            const loginCard = document.getElementById("login-card");
+            regCard.style.display = regCard.style.display === "none" ? "block" : "none";
+            loginCard.style.display = loginCard.style.display === "none" ? "block" : "none";
+        }
+
+        // Handle Registration
+        async function handleRegister(event) {
+            event.preventDefault();
+            const accountNumber = document.getElementById("regAccountNumber").value;
+            const password = document.getElementById("regPassword").value;
+
+            try {
+                const response = await fetch(`${API_BASE}/customers/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ accountNumber, password })
+                });
+                const result = await response.json();
+                alert(result.message || "Registration successful!");
+                toggleView();
+            } catch (error) {
+                console.error(error);
+                alert("Error during registration!");
+            }
+        }
+
+        // Handle Login
+        async function handleLogin(event) {
+            event.preventDefault();
+            const accountNumber = document.getElementById("loginAccountNumber").value;
+            localStorage.setItem("accountNumber",accountNumber);
+            console.log(accountNumber);
+            const password = document.getElementById("loginPassword").value;
+
+            try {
+                const response = await fetch(`${API_BASE}/customers/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ accountNumber, password })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert("Login successful!");
+                    window.location.href = 'cust.html';
+                    // Redirect or perform post-login actions
+                } else {
+                    alert(result.message || "Login failed!");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Error during login!");
+            }
+        }
+    </script>
+
+</body>
+</html>

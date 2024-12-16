@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Loan Application</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        /* General Body Styling */
+/* General Body Styling */
+body {
+    background: linear-gradient(to bottom, #edebeb, #d3d2d2);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #090909;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Logo Container */
+.logo-container {
+    text-align: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.logo-image {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+.kingzbank {
+    font-family: "Rye", serif;
+    font-size: 2rem;
+    color: #111011;
+    margin-top: 10px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: block;
+}
+
+/* Container Styling */
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+/* Card Styling */
+.card {
+    background: linear-gradient(145deg, #efebeb, #dfdede);
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px #202020, -8px -8px 15px #444;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    color: #0f0e0e;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 20px #1a1a1a, -10px -10px 20px #505050;
+}
+
+/* Form Elements */
+.form-label {
+    color: #0f0e0e;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    background: #eae8e8;
+    border: none;
+    border-radius: 10px;
+    color: #070707;
+    padding: 10px;
+    box-shadow: inset 5px 5px 10px #141414, inset -5px -5px 10px #2a2a2a;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Button Styling */
+.btn {
+    background: linear-gradient(145deg, #4a4a4a, #525252);
+    border: none;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 10px #202020, -5px -5px 10px #404040;
+    transition: all 0.3s ease;
+}
+
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(57, 57, 57, 0.8);
+}
+
+/* Toggle Link */
+.toggle-link {
+    color: #1e90ff;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.toggle-link:hover {
+    color: #4682b4;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card {
+    animation: slideIn 0.6s ease forwards;
+}
+
+/* Input Focus Animation */
+.form-control:focus {
+    animation: glow 0.6s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #4caf50;
+    }
+    to {
+        box-shadow: 0 0 10px #4caf50;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .container {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='home.html'" style="background: linear-gradient(to right, #000000, #808080); color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; position: absolute; top: 10px; right: 10px;">
+        Home
+    </button>
+    
+    <div class="logo-container">
+        <!-- Logo Image -->
+        <img src="src/kingzbank.webp" alt="KingzBank Logo" class="logo-image">
+        <!-- Website Name -->
+        <h1 class="kingzbank">KingzBank</h1>
+    </div>
+<br><br><br>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Customer Loan Application</h1>
+
+    <!-- Search Customer Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Search Customer
+        </div>
+        <div class="card-body">
+            <form id="searchForm">
+                <div class="mb-3">
+                    <label for="accountNumber" class="form-label">Account Number</label>
+                    <input type="text" class="form-control" id="accountNumber" placeholder="Enter Account Number" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <div id="customerDetails" class="mt-3"></div>
+        </div>
+    </div>
+
+    <!-- Apply for Loan Section -->
+    <div class="card">
+        <div class="card-header">
+            Apply for Loan
+        </div>
+        <div class="card-body">
+            <form id="loanForm">
+                <h2>By Cash</h2>
+                <div class="mb-3">
+                    <label for="loanAmount" class="form-label">Loan Amount</label>
+                    <input type="number" class="form-control" id="loanAmount" placeholder="Enter Loan Amount" required>
+                </div>
+                <button type="submit" class="btn btn-success">Apply for Loan</button>
+            </form>
+            <div id="loanStatus" class="mt-3"></div>
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <form id="loanForm1">
+            <h2>By Jewel</h2>
+           
+            <input type="number" id="goldunit" placeholder="enter the unit of gold">
+            <label for="goldamount" id="goldamount"></label>
+            <button type="submit" class="btn btn-success">Apply for Loan</button>
+        </form>
+        <div id="loanStatus" class="mt-3"></div>
+    </div>
+</div>
+</div>
+
+<script>
+    const BASE_URL = "http://localhost:8080/api"; // Update with your backend URL
+ let balance=null;
+    // Search Customer
+    document.getElementById("searchForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const accountNumber = document.getElementById("accountNumber").value;
+        const customerDetails = document.getElementById("customerDetails");
+
+        try {
+            const response = await axios.get(`${BASE_URL}/customers/search/${accountNumber}`);
+            const customer = response.data;
+            customerDetails.innerHTML = `
+                <div class="alert alert-success">
+                    <strong>Customer Found!</strong><br>
+                    <strong>Name:</strong> ${customer.name}<br>
+                    <strong>Account Number:</strong> ${customer.accountNumber}<br>
+                    <strong>Balance:</strong> ${customer.balance}<br>
+                    <img src="${customer.photo}" alt="Customer Photo" class="img-thumbnail mt-2" style="max-width: 150px;">
+                
+                    </div>
+            `;
+            balance=customer.balance;
+            console.log(balance);
+        } catch (error) {
+            customerDetails.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> Customer not found or an error occurred.
+                </div>
+            `;
+        }
+    });
+
+    // Apply for Loan
+    document.getElementById("loanForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const accountNumber = document.getElementById("accountNumber").value;
+        const loanAmount = document.getElementById("loanAmount").value;
+        const loanStatus = document.getElementById("loanStatus");
+
+        if (!accountNumber) {
+            loanStatus.innerHTML = `
+                <div class="alert alert-warning">
+                    Please search and select a customer first.
+                </div>
+            `;
+            return;
+        }
+        if(loanAmount>balance*2){
+            loanStatus.innerHTML = `
+                <div class="alert alert-warning">
+                    Loan provided only double the amount not more than that
+                </div>
+            `;
+            return;
+        }
+      
+        try {
+            const formData = new URLSearchParams();
+            formData.append("accountNumber", accountNumber);
+            formData.append("loanType", "Cash");
+            formData.append("loanAmount", parseFloat(loanAmount));
+            formData.append("status", "pending");
+
+            const response = await axios.post(`${BASE_URL}/loans/apply`, formData);
+
+            loanStatus.innerHTML = `
+                <div class="alert alert-success">
+                    Loan application submitted successfully!<br>
+                    <strong>Loan Type:</strong> ${response.data.loanType}<br>
+                    <strong>Amount:</strong> ${response.data.loanAmount}<br>
+                    <strong>Status:</strong> ${response.data.status}
+                </div>
+            `;
+        } catch (error) {
+            loanStatus.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> Failed to apply for the loan. Please try again.
+                </div>
+            `;
+        }
+    });
+
+
+
+// Apply for Loan
+document.getElementById("loanForm1").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const accountNumber = document.getElementById("accountNumber").value;
+        const goldunit = document.getElementById("goldunit").value;
+        
+       
+        const response1 = await axios.get(`${BASE_URL}/loans/get-daily-jewel`);
+        console.log(response1);
+        let goldamount=goldunit*response1.data;
+        console.log(goldamount);
+
+         const displayamount = document.getElementById("goldamount").innerText=goldamount;
+        let loanamount=goldamount;
+         console.log("successfully edited....")
+
+        if (!accountNumber) {
+            loanStatus.innerHTML = `
+                <div class="alert alert-warning">
+                    Please search and select a customer first.
+                </div>
+            `;
+            return;
+        }
+        if(goldamount>balance*2){
+            loanStatus.innerHTML = `
+                <div class="alert alert-warning">
+                    Loan provided only double the amount not more than that
+                </div>
+            `;
+            return;
+            console.log("Loan provided only double the amount not more than that");
+        }
+      
+        try {
+            const formData = new URLSearchParams();
+            formData.append("accountNumber", accountNumber);
+            formData.append("loanType", "Jewel");
+            formData.append("loanAmount", loanamount);
+            formData.append("status", "pending");
+
+
+
+           
+
+
+
+            const response = await axios.post(`${BASE_URL}/loans/apply`, formData);
+            console.log("Successfully submitted");
+
+            loanStatus.innerHTML = `
+                <div class="alert alert-success">
+                    Loan application submitted successfully!<br>
+                    <strong>Loan Type:</strong> ${response.data.loanType}<br>
+                    <strong>Amount:</strong> ${response.data.loanAmount}<br>
+                    <strong>Status:</strong> ${response.data.status}
+                </div>
+            `;
+        } catch (error) {
+            loanStatus.innerHTML = `
+                <div class="alert alert-danger">
+                    <strong>Error:</strong> Failed to apply for the loan. Please try again.
+                </div>
+            `;
+        }
+    });
+
+     
+   
+</script>
+
+</body>
+</html>

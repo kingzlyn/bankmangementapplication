@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Cashier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       /* General Body Styling */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Logo Styling */
+.logo-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.logo-image {
+    width: 120px; /* Adjust size as necessary */
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.kingzbank {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em; /* Adjust size to fit the layout */
+    font-weight: bold;
+    color: #510505;
+    background: linear-gradient(45deg, #727172, #9b9d9e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-left: 20px; /* Space between logo and website name */
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #efecee, 0 0 20px #888787, 0 0 30px #736f72;
+    }
+    to {
+        text-shadow: 0 0 10px #d5d2d4, 0 0 20px #a49fa2, 0 0 30px #6d696b, 0 0 40px #252424;
+    }
+}
+
+/* Form Container Styling */
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 2rem auto;
+    width: 90%;
+}
+
+/* Card Styling */
+.card {
+    width: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #f5f5f5, #e0e0e0);
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+/* Button Styling */
+.btn-grad {
+    background-image: linear-gradient(to right, #bbb2b2 0%, #827f7f 51%, #403f3f 100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.btn-grad:hover {
+    background-position: right center; /* Change the direction of the gradient */
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Input Styling */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.8);
+    outline: none;
+}
+
+/* Result Box Styling */
+#result {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #e7f5e7;
+    color: #2d7d2a;
+    width: 300px;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='home.html'" style="background: linear-gradient(to right, #000000, #808080); color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; position: absolute; top: 10px; right: 10px;">
+        Home
+    </button>
+    
+    <div class="logo-container">
+        <img src="src/kingzbank.webp" alt="KingzBank Logo" class="logo-image">
+        <h1 class="kingzbank">KingzBank</h1>
+    </div>
+
+    <div class="form-container">
+        <!-- Deposit Form Card -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-center">Deposit</h5>
+                <form id="deposit-form" onsubmit="handleDeposit(event)">
+                    <div class="mb-3">
+                        <label for="depositAccount" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" id="depositAccount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="depositAmount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="depositAmount" required>
+                    </div>
+                    <button type="submit" class="btn btn-grad">Deposit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Withdraw Form Card -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-center">Withdraw</h5>
+                <form id="withdraw-form" onsubmit="handleWithdraw(event)">
+                    <div class="mb-3">
+                        <label for="withdrawAccount" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" id="withdrawAccount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="withdrawAmount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="withdrawAmount" required>
+                    </div>
+                    <button type="submit" class="btn btn-grad">Withdraw</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Check Balance Form Card -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-center">Check Balance</h5>
+                <form id="balance-form" onsubmit="handleCheckBalance(event)">
+                    <div class="mb-3">
+                        <label for="balanceAccount" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" id="balanceAccount" required>
+                    </div>
+                    <button type="submit" class="btn btn-grad">Check Balance</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Display -->
+    <div id="result" class="mx-auto"></div>
+
+    <script>
+        const API_BASE = "http://localhost:8080/api";
+
+        async function handleDeposit(event) {
+            event.preventDefault();
+            const account = document.getElementById("depositAccount").value;
+            const amount = document.getElementById("depositAmount").value;
+
+            try {
+                const response = await fetch(`${API_BASE}/transactions/deposit`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ accountNumber: account, amount: parseFloat(amount) })
+                });
+                const result = await response.json();
+                document.getElementById("result").textContent = result.message;
+                document.getElementById("result").style.display = 'block';
+            } catch (error) {
+                console.error(error);
+                alert("Error during deposit!");
+            }
+        }
+
+        async function handleWithdraw(event) {
+            event.preventDefault();
+            const account = document.getElementById("withdrawAccount").value;
+            const amount = document.getElementById("withdrawAmount").value;
+
+            try {
+                const response = await fetch(`${API_BASE}/transactions/withdraw`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ accountNumber: account, amount: parseFloat(amount) })
+                });
+                const result = await response.json();
+                document.getElementById("result").textContent = result.message;
+                document.getElementById("result").style.display = 'block';
+            } catch (error) {
+                console.error(error);
+                alert("Error during withdrawal!");
+            }
+        }
+
+        async function handleCheckBalance(event) {
+            event.preventDefault();
+            const account = document.getElementById("balanceAccount").value;
+
+            try {
+                const response = await fetch(`${API_BASE}/transactions/balance/${account}`);
+                const result = await response.json();
+                document.getElementById("result").textContent = `Balance: ${result.balance}`;
+                document.getElementById("result").style.display = 'block';
+            } catch (error) {
+                console.error(error);
+                alert("Error checking balance!");
+            }
+        }
+    </script>
+
+</body>
+</html>

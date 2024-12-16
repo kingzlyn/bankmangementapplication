@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Search Account</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/account.css">
+     
+  
+  <style>
+    /* Body Styling */
+body {
+    background-image: radial-gradient(circle, rgba(137, 171, 245, 0.37) 0%, rgba(245, 247, 252, 1) 100%);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #1f1c2c;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+/* Header Styling */
+.kingz-header {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.kingz-header h1 {
+    font-family: "Rye", serif;
+    font-size: 3rem;
+    color: #4c264f;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Form Styling */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.7s ease-in-out;
+}
+
+form .form-control {
+    border: 1px solid #d5d6e0;
+    border-radius: 5px;
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+form .form-control:focus {
+    outline: none;
+    box-shadow: 0px 0px 10px #928dab;
+}
+
+form .btn-primary {
+    background: linear-gradient(135deg, #928dab, #1f1c2c);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+form .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Loan Cards */
+.loan-card {
+    background: linear-gradient(135deg, #f3e8f7, #ffffff);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    animation: popIn 0.5s ease-in-out;
+}
+
+.loan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.loan-card h5 {
+    color: #4c264f;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.loan-card p {
+    margin: 0 0 10px;
+    color: #1f1c2c;
+}
+
+.loan-card button {
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.loan-card button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Customer Details */
+.customer-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    margin-right: 20px;
+}
+
+.customer-signature {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.passbook {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.7s ease-in-out;
+}
+
+/* Pie Chart */
+canvas {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+body {
+    overflow: auto;
+}
+
+.form-container {
+    overflow-y: auto;
+}
+form {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+form {
+    margin: 20px auto;
+    padding: 20px;
+}
+@media (max-width: 768px) {
+    form {
+        width: 90%;
+    }
+}
+
+  </style>
+</head>
+<body>
+    <button onclick="window.location.href='home.html'" style="background: linear-gradient(to right, #000000, #808080); color: white; padding: 12px 30px; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; transition: background 0.3s ease; position: absolute; top: 10px; right: 10px;">
+        Home
+    </button>
+    
+
+    <div class="logo-container">
+        <!-- Logo Image -->
+        <img src="src/kingzbank.webp" alt="KingzBank Logo" class="logo-image">
+        <!-- Website Name -->
+        <h1 class="kingzbank">KingzBank</h1>
+    </div>
+    
+    <div class="form-container" id="form-container">
+        <div id="buttons-container">
+            <button class="btn btn-primary mb-3" onclick="showCreateAccountForm()">Create Account</button>
+            <button class="btn btn-secondary mb-3" onclick="showSearchAccountForm()">Search Account</button>
+        </div>
+
+        <!-- Create Account Form -->
+        <form id="create-account-form" style="display: none;" onsubmit="createAccount(event)">
+            <h2>Create Account</h2>
+            <div class="form-group">
+                <label for="photo">Upload Photo</label>
+                <input type="file" class="form-control" id="photo" required>
+            </div>
+            <div class="form-group">
+                <label for="accountNumber">Account Number</label>
+                <input type="text" class="form-control" id="accountNumber" readonly>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" class="form-control" id="mobile" required>
+            </div>
+            <div class="form-group">
+                <label for="aadhar">Aadhar Number</label>
+                <input type="text" class="form-control" id="aadhar" required>
+            </div>
+            <div class="form-group">
+                <label for="pan">PAN Number</label>
+                <input type="text" class="form-control" id="pan" required>
+            </div>
+            <div class="form-group">
+                <label for="sign">Signature</label>
+                <input type="file" class="form-control" id="sign" required>
+            </div>
+            <div class="form-group">
+                <label for="ifsc">IFSC Code</label>
+                <input type="text" class="form-control" id="ifsc" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Create Account</button>
+            </div>
+        </form>
+
+        <!-- Search Account Form -->
+        <form id="search-account-form" style="display: none;" onsubmit="searchAccount(event)">
+            <h2>Search Account</h2>
+            <div class="form-group">
+                <label for="searchAccountNumber">Enter Account Number</label>
+                <input type="text" class="form-control" id="searchAccountNumber" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Search Account</button>
+            </div>
+        </form>
+
+        <!-- Result Container -->
+        <div id="result-container"></div>
+    </div>
+
+    <script>
+
+let nextAccountNumber;
+        // Display Create Account Form
+        function showCreateAccountForm() {
+            document.getElementById('create-account-form').style.display = 'block';
+            document.getElementById('search-account-form').style.display = 'none';
+            fetchNextAccountNumber(); // Fetch next account number when showing form
+        }
+
+        // Display Search Account Form
+        function showSearchAccountForm() {
+            document.getElementById('create-account-form').style.display = 'none';
+            document.getElementById('search-account-form').style.display = 'block';
+        }
+
+        // Fetch the next account number from the backend
+        async function fetchNextAccountNumber() {
+            try {
+                const response = await fetch('http://localhost:8080/api/customers/nextAccountNumber');
+                console.log(response);
+                if (response.ok) {
+                    const nextAccountNumber  = await response.json();
+                    document.getElementById('accountNumber').value = nextAccountNumber;
+                   console.log(nextAccountNumber);
+                } else {
+                    alert('Failed to fetch account number!');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error fetching account number!');
+            }
+          
+        }
+
+        // Create a new account
+        async function createAccount(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('photo', document.getElementById('photo').files[0]);
+            formData.append('sign', document.getElementById('sign').files[0]);
+            formData.append('accountNumber', nextAccountNumber);
+            formData.append('name', document.getElementById('name').value);
+            formData.append('age', document.getElementById('age').value);
+            formData.append('gender', document.getElementById('gender').value);
+            formData.append('mobile', document.getElementById('mobile').value);
+            formData.append('aadhar', document.getElementById('aadhar').value);
+            formData.append('pan', document.getElementById('pan').value);
+            formData.append('ifsc', document.getElementById('ifsc').value);
+            formData.append('password', document.getElementById('password').value);
+
+
+            try {
+                const response = await fetch('http://localhost:8080/api/customers/create', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    alert('Account created successfully!');
+                    document.getElementById('create-account-form').reset();
+                } else {
+                    alert('Error creating account!');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error creating account!');
+            }
+        }
+
+        // Search for an account
+        async function searchAccount(event) {
+            event.preventDefault();
+            const accountNumber = document.getElementById('searchAccountNumber').value;
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/customers/search/${accountNumber}`);
+                if (response.ok) {
+                    const customer = await response.json();
+                    showCustomerDetailsInPassbook(customer);
+                } else {
+                    alert('Account not found!');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error searching account!');
+            }
+        }
+
+        // Display customer details in a passbook-style layout
+        function showCustomerDetailsInPassbook(customer) {
+            const passbookContainer = document.createElement('div');
+            passbookContainer.classList.add('passbook-container');
+            passbookContainer.innerHTML = `
+                <div class="passbook-header">
+                    <h3>KINGZBANK</h3>
+                    <p><strong>Passbook</strong> - Account Details</p>
+                </div>
+                <div class="passbook-body">
+                    <div class="passbook-photo">
+                        <img src="${customer.photo}" alt="Customer Photo" width="100" height="100">
+                    </div>
+                    <div class="customer-details">
+                        <p><strong>Account Number:</strong> ${customer.accountNumber}</p>
+                        <p><strong>Name:</strong> ${customer.name}</p>
+                        <p><strong>Age:</strong> ${customer.age}</p>
+                        <p><strong>Gender:</strong> ${customer.gender}</p>
+                        <p><strong>Mobile:</strong> ${customer.mobile}</p>
+                        <p><strong>Aadhar:</strong> ${customer.aadhar}</p>
+                        <p><strong>PAN:</strong> ${customer.pan}</p>
+                        <p><strong>IFSC:</strong> ${customer.ifsc}</p>
+                    </div>
+                     <div class="passbook-photo">
+                        <img src="${customer.signature}" alt="Customer sign" width="100" height="100">
+                    </div>
+                </div>
+            `;
+            document.getElementById('result-container').innerHTML = ''; // Clear previous results
+            document.getElementById('result-container').appendChild(passbookContainer);
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
